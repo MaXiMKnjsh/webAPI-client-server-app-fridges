@@ -6,5 +6,4 @@ present to interact with this Api. Used Nuget packages, interfaces such as:</h3>
 <h2 align="center">Keywords: ASP.Net Core Web Api, Unit-tests, MsSQL, Migrations, .NET Core</h2>
 <h3 align="center">The terms of reference:</h3>
 <img src="image.jpg" alt="where is the photo???">
-<img src="image.jpg" alt="where is the photo???">
-<img src="image.jpg" alt="where is the photo???">
+<img src="image2.jpg" alt="where is the photo???">
