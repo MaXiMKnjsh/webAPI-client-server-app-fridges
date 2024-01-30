@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "y9FEMsmN09APF3zvjUXy1CaK06ffVIUPuFLgLaT7CD4=",
+  "Source": "WebApiFridges.API",
+  "BasePath": "_content/WebApiFridges.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
