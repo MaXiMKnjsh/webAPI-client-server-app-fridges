@@ -6,5 +6,8 @@ namespace WebApiFridges.MyIntefaces
 {
     public interface IFridgeRepository   {
         IEnumerable<ResponceFridges> GetFridgesList();
+        bool DeleteFridge(Guid guid);
+        bool Save();
+        bool isFridgeExist(Guid guid);
     }
 }

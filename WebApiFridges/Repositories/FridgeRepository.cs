@@ -13,6 +13,32 @@ namespace WebApiFridges.Repository
             this.dataContext = context;
         }
 
+        public bool isFridgeExist(Guid guid)
+        {
+            var fridge = dataContext.Fridges.FirstOrDefault(x => x.Id == guid);
+            if (fridge == null)
+                return false;
+
+            return true;
+        }
+
+        public bool DeleteFridge(Guid guid)
+        {
+            var fridgeToDelete = dataContext.Fridges.FirstOrDefault(x => x.Id == guid);
+            if (fridgeToDelete != null)
+            {
+                dataContext.Fridges.Remove(fridgeToDelete);
+                return Save();
+            }
+            return false;
+        }
+
+        public bool Save()
+        {
+            int savedCount = dataContext.SaveChanges();
+            return savedCount > 0 ? true : false;
+        }
+
         public IEnumerable<ResponceFridges> GetFridgesList()
         {
             // если нет подходящих результатов, то join вернёт таблицу без строк
@@ -24,8 +50,8 @@ namespace WebApiFridges.Repository
                 {
                     Guid = fr.Id,
                     Name = fr.Name,
-                    OwnerName=fr.OwnerName,
-                    Model=frMod.Name,
+                    OwnerName = fr.OwnerName,
+                    Model = frMod.Name,
                     Year = frMod.Year
                 };
             return query;

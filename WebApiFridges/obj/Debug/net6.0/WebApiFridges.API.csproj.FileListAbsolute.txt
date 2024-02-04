@@ -85,6 +85,7 @@ D:\homework\selfeducation\WebApiFridges\WebApiFridges\obj\Debug\net6.0\refint\We
 D:\homework\selfeducation\WebApiFridges\WebApiFridges\obj\Debug\net6.0\WebApiFridges.API.pdb
 D:\homework\selfeducation\WebApiFridges\WebApiFridges\obj\Debug\net6.0\WebApiFridges.API.genruntimeconfig.cache
 D:\homework\selfeducation\WebApiFridges\WebApiFridges\obj\Debug\net6.0\ref\WebApiFridges.API.dll
+D:\homework\selfeducation\WebApiFridges\WebApiFridges\bin\Debug\net6.0\libman.json
 C:\Users\User\Desktop\webAPI-client-server-app-fridges\WebApiFridges\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\User\Desktop\webAPI-client-server-app-fridges\WebApiFridges\bin\Debug\net6.0\appsettings.json
 C:\Users\User\Desktop\webAPI-client-server-app-fridges\WebApiFridges\bin\Debug\net6.0\libman.json

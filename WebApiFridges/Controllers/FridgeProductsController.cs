@@ -35,7 +35,7 @@ namespace WebApiFridges.Controllers
                 return Ok(products);
         }
 
-        [HttpDelete("fridgeProductsId")]
+        [HttpDelete("{fridgeProductsId}")]
         public IActionResult RemoveProducts(Guid fridgeProductsId)
         {
             if (!fridgeProductsRepository.IsFridgeProductExist(fridgeProductsId))

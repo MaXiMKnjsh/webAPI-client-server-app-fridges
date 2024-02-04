@@ -2,6 +2,7 @@
 using WebApiFridges.Models;
 using WebApiFridges.MyIntefaces;
 using WebApiFridges.MyResponceClasses;
+using WebApiFridges.Repository;
 
 namespace WebApiFridges.Controllers
 {
@@ -27,6 +28,24 @@ namespace WebApiFridges.Controllers
                 return NotFound();
 
             return Ok(fridges);
+        }
+
+        [HttpDelete("{fridgeGuid}")]
+        public IActionResult DeleteFridge(Guid fridgeGuid) 
+        {
+            if (!fridgeRepository.isFridgeExist(fridgeGuid))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!fridgeRepository.DeleteFridge(fridgeGuid))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving!");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Successfully removed!");
         }
     }
 }
