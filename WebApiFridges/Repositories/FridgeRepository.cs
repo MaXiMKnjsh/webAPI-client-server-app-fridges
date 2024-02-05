@@ -1,4 +1,5 @@
-﻿using WebApiFridges.Data;
+﻿using System;
+using WebApiFridges.Data;
 using WebApiFridges.Models;
 using WebApiFridges.MyIntefaces;
 using WebApiFridges.MyResponceClasses;
@@ -13,6 +14,14 @@ namespace WebApiFridges.Repository
             this.dataContext = context;
         }
 
+        public bool isModelExist(Guid modelGuid)
+        {
+			var model = dataContext.FridgeModels.FirstOrDefault(x => x.Id == modelGuid);
+			if (model == null)
+				return false;
+
+			return true;
+		}
         public bool isFridgeExist(Guid guid)
         {
             var fridge = dataContext.Fridges.FirstOrDefault(x => x.Id == guid);
@@ -56,5 +65,19 @@ namespace WebApiFridges.Repository
                 };
             return query;
         }
-    }
+
+		public bool CreateFridge(string name, string ownerName, Guid modelGuid)
+		{
+            var fridgeToCreate = new Fridge()
+            {
+                ModelId = modelGuid,
+                Name = name,
+                OwnerName = ownerName,
+            };
+
+            dataContext.Fridges.Add(fridgeToCreate);
+
+            return Save();
+		}
+	}
 }
