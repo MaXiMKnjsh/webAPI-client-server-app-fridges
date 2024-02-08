@@ -157,3 +157,4 @@ D:\homework\selfeducation\WebApiFridges\WebApiFridges.TESTS\obj\Debug\net6.0\ref
 D:\homework\selfeducation\WebApiFridges\WebApiFridges.TESTS\obj\Debug\net6.0\WebApiFridges.TESTS.pdb
 D:\homework\selfeducation\WebApiFridges\WebApiFridges.TESTS\obj\Debug\net6.0\WebApiFridges.TESTS.genruntimeconfig.cache
 D:\homework\selfeducation\WebApiFridges\WebApiFridges.TESTS\obj\Debug\net6.0\ref\WebApiFridges.TESTS.dll
+D:\homework\selfeducation\WebApiFridges\WebApiFridges.TESTS\bin\Debug\net6.0\libman.json

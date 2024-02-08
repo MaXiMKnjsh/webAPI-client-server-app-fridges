@@ -29,7 +29,7 @@ namespace WebApiFridges
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-			// CORS service addition
+			// Добавляем сервисы CORS
 			builder.Services.AddCors(options =>
 			{
 				options.AddDefaultPolicy(builder =>
@@ -43,7 +43,7 @@ namespace WebApiFridges
 
 			var app = builder.Build();
 
-			// activation CORS
+			// настраиваем CORS
 			app.UseCors();
 
 			// Configure the HTTP request pipeline.

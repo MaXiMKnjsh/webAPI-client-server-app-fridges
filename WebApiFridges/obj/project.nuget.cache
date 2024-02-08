@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "u+WEjtZwrZDuQDAqSVdq4XpvP1ixiHDlK2zNwlcGCLP2uddRS54L46uZ2MGOghpY2v0EJ4O9Q5J8vAaATMwtxw==",
+  "dgSpecHash": "9wQq/eEzAMQ0vw6YlleJDq3dsqLoXJkFtqr80Rzk2jkPUuqiXP1tOFFcNw1jV9sL1l2iW7k+yYopwt7xNol2Sw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\User\\Desktop\\webAPI-client-server-app-fridges\\WebApiFridges\\WebApiFridges.API.csproj",
+  "projectFilePath": "D:\\homework\\selfeducation\\WebApiFridges\\WebApiFridges\\WebApiFridges.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

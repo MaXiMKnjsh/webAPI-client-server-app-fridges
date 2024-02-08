@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\webAPI-client-server-app-fridges\\WebApiFridges\\WebApiFridges.API.csproj": {}
+    "D:\\homework\\selfeducation\\WebApiFridges\\WebApiFridges\\WebApiFridges.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\webAPI-client-server-app-fridges\\WebApiFridges\\WebApiFridges.API.csproj": {
+    "D:\\homework\\selfeducation\\WebApiFridges\\WebApiFridges\\WebApiFridges.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\webAPI-client-server-app-fridges\\WebApiFridges\\WebApiFridges.API.csproj",
+        "projectUniqueName": "D:\\homework\\selfeducation\\WebApiFridges\\WebApiFridges\\WebApiFridges.API.csproj",
         "projectName": "WebApiFridges.API",
-        "projectPath": "C:\\Users\\User\\Desktop\\webAPI-client-server-app-fridges\\WebApiFridges\\WebApiFridges.API.csproj",
+        "projectPath": "D:\\homework\\selfeducation\\WebApiFridges\\WebApiFridges\\WebApiFridges.API.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\webAPI-client-server-app-fridges\\WebApiFridges\\obj\\",
+        "outputPath": "D:\\homework\\selfeducation\\WebApiFridges\\WebApiFridges\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
