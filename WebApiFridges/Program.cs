@@ -28,12 +28,26 @@ namespace WebApiFridges
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
-            //-------------
 
-            var app = builder.Build();
+			// CORS service addition
+			builder.Services.AddCors(options =>
+			{
+				options.AddDefaultPolicy(builder =>
+				{
+					builder.AllowAnyOrigin()
+						   .AllowAnyHeader()
+						   .AllowAnyMethod();
+				});
+			});
+			//-------------
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+			var app = builder.Build();
+
+			// activation CORS
+			app.UseCors();
+
+			// Configure the HTTP request pipeline.
+			if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
