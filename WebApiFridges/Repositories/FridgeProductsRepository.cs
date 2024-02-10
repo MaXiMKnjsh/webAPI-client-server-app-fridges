@@ -17,7 +17,7 @@ namespace WebApiFridges.Repository
 
         public IEnumerable<ResponceFridgeProducts> GetProductsList(Guid fridgeId)
         {
-            IEnumerable<ResponceFridgeProducts> query =
+            IEnumerable<ResponceFridgeProducts> responce =
                 from frPr in dataContext.FridgeProducts.Where(x => x.FridgeId == fridgeId)
                 join pr in dataContext.Products
                 on frPr.ProductId equals pr.Id
@@ -28,7 +28,7 @@ namespace WebApiFridges.Repository
                     Quantity = frPr.Quantity
                 };
 
-            return query;
+            return responce;
         }
         public bool AddProducts(Guid fridgeId, Guid productId, int quantity)
         {

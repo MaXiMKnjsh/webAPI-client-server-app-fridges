@@ -25,7 +25,7 @@ namespace WebApiFridges.Controllers
 				return BadRequest(ModelState);
 
 			if (!fridges.Any())
-				return NotFound();
+				return StatusCode(204,ModelState);
 
 			return Ok(fridges);
 		}

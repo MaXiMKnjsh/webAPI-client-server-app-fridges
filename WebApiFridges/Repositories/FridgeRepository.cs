@@ -51,7 +51,7 @@ namespace WebApiFridges.Repository
         public IEnumerable<ResponceFridges> GetFridgesList()
         {
             // если нет подходящих результатов, то join вернёт таблицу без строк
-            IEnumerable<ResponceFridges> query =
+            IEnumerable<ResponceFridges> responce =
                 from fr in dataContext.Fridges
                 join frMod in dataContext.FridgeModels
                 on fr.ModelId equals frMod.Id
@@ -63,7 +63,7 @@ namespace WebApiFridges.Repository
                     Model = frMod.Name,
                     Year = frMod.Year
                 };
-            return query;
+            return responce;
         }
 
 		public bool CreateFridge(string name, string ownerName, Guid modelGuid)

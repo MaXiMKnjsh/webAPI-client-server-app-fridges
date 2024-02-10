@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Text;
+using WebApiFridges.API.MyIntefaces;
+using WebApiFridges.API.Repositories;
 using WebApiFridges.Data;
 using WebApiFridges.Models;
 using WebApiFridges.MyIntefaces;
@@ -23,8 +25,9 @@ namespace WebApiFridges
             builder.Services.AddScoped<IFridgeRepository, FridgeRepository>(); // одно внедрение на весь запрос
             builder.Services.AddScoped<IFridgeProductsRepository, FridgeProductsRepository>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
+			builder.Services.AddScoped<IFridgeModelsRepository, FridgeModelsRepository>();
 
-            builder.Services.AddDbContext<DataContext>(options =>
+			builder.Services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
