@@ -57,16 +57,39 @@ namespace WebApiFridges.Repository
 
             return true;
         }
+		public bool AddProducts(IEnumerable<Guid> requestProducts, Guid fridgeGuid)
+		{
+			foreach (var productGuid in requestProducts)
+			{
+				dataContext.Add(new FridgeProducts()
+				{
+					ProductId = productGuid,
+					FridgeId = fridgeGuid,
+					Quantity = dataContext.Products.FirstOrDefault(x => x.Id == productGuid)?.DefaultQuantity ?? 0
+				});
+			}
 
-        public bool IsProductExist(Guid productId)
+			return Save();
+		}
+
+		public bool IsProductExist(Guid productId)
         {
             if (dataContext.Products.FirstOrDefault(x => x.Id == productId) == null)
                 return false;
 
             return true;
         }
+		public bool IsProducstExist(IEnumerable<Guid> productsGuids)
+		{
+			foreach (var i in productsGuids)
+			{
+				if (dataContext.Products.FirstOrDefault(x => x.Id == i) == null)
+					return false;
+			}
+			return true;
+		}
 
-        public bool IsFridgeProductExist(Guid fridgeProductId)
+		public bool IsFridgeProductExist(Guid fridgeProductId)
         {
             if (dataContext.FridgeProducts.FirstOrDefault(x => x.Id == fridgeProductId) == null)
                 return false;

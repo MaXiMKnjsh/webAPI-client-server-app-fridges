@@ -67,8 +67,8 @@ namespace WebApiFridges.Controllers
             return Ok($"Successfully updated {savedCount} products!");
         }
 
-        [HttpPost]
-        public IActionResult AddProducts(Guid fridgeGuid, Guid productGuid, int quantity)
+        [HttpPost("AddProduct")]
+        public IActionResult AddProduct(Guid fridgeGuid, Guid productGuid, int quantity)
         {   
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -94,5 +94,26 @@ namespace WebApiFridges.Controllers
 
             return Ok("Successfully created!");
         }
-    }
+
+		[HttpPost("AddProducts")]
+		public IActionResult AddProducts([FromBody] IEnumerable<Guid> productsGuids, Guid fridgeGuid)
+		{
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			if (!fridgeProductsRepository.IsFridgeExist(fridgeGuid) || !fridgeProductsRepository.IsProducstExist(productsGuids))
+			{
+				ModelState.AddModelError("", "The product or the refrigerator doesn't exist!");
+				return StatusCode(400, ModelState);
+			}
+
+			if (!fridgeProductsRepository.AddProducts(productsGuids, fridgeGuid))
+			{
+				ModelState.AddModelError("", "Something went wrong while saving!");
+				return StatusCode(500, ModelState);
+			}
+
+			return Ok("Successfully created!");
+		}
+	}
 }

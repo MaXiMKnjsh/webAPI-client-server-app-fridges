@@ -7,7 +7,9 @@ namespace WebApiFridges.MyIntefaces
     {
         IEnumerable<ResponceFridgeProducts> GetProductsList(Guid fridgeId);
         bool AddProducts(Guid fridgeId, Guid productId, int quantity);
-        bool Save();
+		bool AddProducts(IEnumerable<Guid> guids, Guid fridgeGuid);
+		bool IsProducstExist(IEnumerable<Guid> productsGuids);
+		bool Save();
         bool IsFridgeExist(Guid fridgeId);
         bool IsProductExist(Guid productId);
         bool RemoveFridgeProducts(Guid guid);
