@@ -66,18 +66,21 @@ namespace WebApiFridges.Repository
             return responce;
         }
 
-		public bool CreateFridge(string name, string ownerName, Guid modelGuid)
+		public Guid CreateFridge(string name, Guid modelGuid, string? ownerName = null)
 		{
             var fridgeToCreate = new Fridge()
             {
                 ModelId = modelGuid,
                 Name = name,
                 OwnerName = ownerName,
-            };
+			};
 
             dataContext.Fridges.Add(fridgeToCreate);
 
-            return Save();
+            if (!Save()) 
+                return Guid.Empty;
+
+			return fridgeToCreate.Id;
 		}
 	}
 }

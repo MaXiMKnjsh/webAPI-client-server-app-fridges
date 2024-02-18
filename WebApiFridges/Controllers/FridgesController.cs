@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using WebApiFridges.Models;
 using WebApiFridges.MyIntefaces;
 using WebApiFridges.MyResponceClasses;
@@ -49,7 +50,7 @@ namespace WebApiFridges.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult AddFridge(string name, string ownerName, Guid modelGuid)
+		public IActionResult AddFridge(string name, string? ownerName, Guid modelGuid)
 		{
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
@@ -57,13 +58,15 @@ namespace WebApiFridges.Controllers
 			if (!fridgeRepository.isModelExist(modelGuid))
 				return NotFound();
 
-			if (!fridgeRepository.CreateFridge(name, ownerName, modelGuid))
+			Guid newFridgeGuid = Guid.Empty;
+
+			if ((newFridgeGuid = fridgeRepository.CreateFridge(name, modelGuid, ownerName)) == Guid.Empty)
 			{
 				ModelState.AddModelError("", "Something went wrong while saving!");
 				return StatusCode(500, ModelState);
 			}
 
-			return Ok("Successfully added!");
+			return StatusCode(200, newFridgeGuid);
 		}
 	}
 }

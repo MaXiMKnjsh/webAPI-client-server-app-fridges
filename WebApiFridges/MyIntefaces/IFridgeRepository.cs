@@ -9,7 +9,7 @@ namespace WebApiFridges.MyIntefaces
         bool DeleteFridge(Guid guid);
         bool Save();
         bool isFridgeExist(Guid guid);
-        bool CreateFridge(string name, string ownerName, Guid modelGuid);
+		Guid CreateFridge(string name, Guid modelGuid, string? ownerName=null);
         bool isModelExist(Guid modelGuid);
 
 	}
