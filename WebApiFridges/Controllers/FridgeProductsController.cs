@@ -27,7 +27,7 @@ namespace WebApiFridges.Controllers
             IEnumerable<ResponceFridgeProducts> products = fridgeProductsRepository.GetProductsList(fridgeGuid);
 
             if (!products.Any())
-                return NotFound("There are no products in this refrigerator!");
+                return NoContent();
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

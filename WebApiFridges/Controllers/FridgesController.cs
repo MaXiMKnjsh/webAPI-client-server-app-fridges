@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Project;
 using System.Net;
+using WebApiFridges.API.MyResponceClasses;
 using WebApiFridges.Models;
 using WebApiFridges.MyIntefaces;
 using WebApiFridges.MyResponceClasses;
@@ -26,9 +28,26 @@ namespace WebApiFridges.Controllers
 				return BadRequest(ModelState);
 
 			if (!fridges.Any())
-				return StatusCode(204,ModelState);
+				return StatusCode(204, ModelState);
 
 			return Ok(fridges);
+		}
+		[HttpPut]
+		public IActionResult EditFridge([FromBody] ResponceFridgesToEdit newFridgeData)
+		{
+			if (!fridgeRepository.isFridgeExist(newFridgeData.fridgeGuid))
+				return NotFound();
+
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			if (!fridgeRepository.EditFridge(newFridgeData))
+			{
+				ModelState.AddModelError("", "Something went wrong while updating!");
+				return StatusCode(500, ModelState);
+			}
+
+			return Ok("Successfully updated!");
 		}
 
 		[HttpDelete("{fridgeGuid}")]

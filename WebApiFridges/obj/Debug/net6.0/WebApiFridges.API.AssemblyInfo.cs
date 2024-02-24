@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebApiFridges.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+42af69008f80af01bab440ac0d554204eeafdddc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5bf9cec36cc58e36f3d730b981df892b0b53509a")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebApiFridges.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebApiFridges.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

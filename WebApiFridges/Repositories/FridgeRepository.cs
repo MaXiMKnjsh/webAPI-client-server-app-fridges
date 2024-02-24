@@ -1,4 +1,5 @@
 ﻿using System;
+using WebApiFridges.API.MyResponceClasses;
 using WebApiFridges.Data;
 using WebApiFridges.Models;
 using WebApiFridges.MyIntefaces;
@@ -61,7 +62,8 @@ namespace WebApiFridges.Repository
                     Name = fr.Name,
                     OwnerName = fr.OwnerName,
                     Model = frMod.Name,
-                    Year = frMod.Year
+                    Year = frMod.Year,
+                    ModelGuid = frMod.Id
                 };
             return responce;
         }
@@ -81,6 +83,20 @@ namespace WebApiFridges.Repository
                 return Guid.Empty;
 
 			return fridgeToCreate.Id;
+		}
+
+		public bool EditFridge(ResponceFridgesToEdit newFridgeData)
+		{
+			var editableFridge = dataContext.Fridges.FirstOrDefault(x => x.Id == newFridgeData.fridgeGuid);
+
+            if (editableFridge == null)
+                return false;
+
+            editableFridge.ModelId = newFridgeData.ModelGuid;
+            editableFridge.Name = newFridgeData.Name;
+            editableFridge.OwnerName = newFridgeData.OwnerName;
+
+            return Save();
 		}
 	}
 }
