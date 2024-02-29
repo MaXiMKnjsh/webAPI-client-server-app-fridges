@@ -15,6 +15,8 @@ namespace WebApiFridges.MyIntefaces
         bool RemoveFridgeProducts(Guid guid);
         bool IsFridgeProductExist(Guid fridgeProductId);
         int UpdateProductsToDefQuant();
-        int SaveWithCount();
+        bool EditProducts(IEnumerable<Guid> productsGuids, Guid fridgeGuid);
+
+		int SaveWithCount();
     }
 }

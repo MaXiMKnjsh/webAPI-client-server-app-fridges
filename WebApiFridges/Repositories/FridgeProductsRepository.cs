@@ -23,7 +23,7 @@ namespace WebApiFridges.Repository
                 on frPr.ProductId equals pr.Id
                 select new ResponceFridgeProducts
                 {
-                    Guid = frPr.Id,
+                    ProductGuid = frPr.ProductId,
                     Name = pr.Name,
                     Quantity = frPr.Quantity
                 };
@@ -124,5 +124,14 @@ namespace WebApiFridges.Repository
         {
             return dataContext.SaveChanges();
         }
-    }
+
+		public bool EditProducts(IEnumerable<Guid> productsGuids, Guid fridgeGuid)
+		{
+            var productsToDelete = dataContext.FridgeProducts.Where(x => x.FridgeId == fridgeGuid).ToList();
+
+            dataContext.FridgeProducts.RemoveRange(productsToDelete);
+
+            return AddProducts(productsGuids,fridgeGuid);
+		}
+	}
 }

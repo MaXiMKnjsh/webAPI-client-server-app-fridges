@@ -7,93 +7,111 @@ using WebApiFridges.Repository;
 
 namespace WebApiFridges.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class FridgeProductsController : Controller
-    {
-        private readonly IFridgeProductsRepository fridgeProductsRepository;
-        public FridgeProductsController(IFridgeProductsRepository fridgeProductsRepository)
-        {
-            this.fridgeProductsRepository = fridgeProductsRepository;
-        }
+	[ApiController]
+	[Route("api/[controller]")]
+	public class FridgeProductsController : Controller
+	{
+		private readonly IFridgeProductsRepository fridgeProductsRepository;
+		public FridgeProductsController(IFridgeProductsRepository fridgeProductsRepository)
+		{
+			this.fridgeProductsRepository = fridgeProductsRepository;
+		}
 
-        [HttpGet("{fridgeGuid}")] //apiFridgeProducts/{frId}
-        public IActionResult GetProductsList(Guid fridgeGuid)
-        {
-            if (!fridgeProductsRepository.IsFridgeExist(fridgeGuid))
-                return NotFound("Fridge doesn't exist!");
+		[HttpPut("{fridgeGuid}")]
+		public IActionResult EditProducts([FromBody] IEnumerable<Guid> productsGuids, Guid fridgeGuid)
+		{
+			if (!fridgeProductsRepository.IsFridgeExist(fridgeGuid))
+				return NotFound("Fridge doesn't exist!");
 
-            // метод возвращает либо пустую последовательность, либо заполненную, если есть совпадения
-            IEnumerable<ResponceFridgeProducts> products = fridgeProductsRepository.GetProductsList(fridgeGuid);
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
 
-            if (!products.Any())
-                return NoContent();
+			if (!fridgeProductsRepository.EditProducts(productsGuids, fridgeGuid))
+			{
+				ModelState.AddModelError("", "Something went wrong while saving!");
+				return StatusCode(500, ModelState);
+			}
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+			return Ok("Successfully changed!");
+		}
 
-                return Ok(products);
-        }
+		[HttpGet("{fridgeGuid}")] //apiFridgeProducts/{frId}
+		public IActionResult GetProductsList(Guid fridgeGuid)
+		{
+			if (!fridgeProductsRepository.IsFridgeExist(fridgeGuid))
+				return NotFound("Fridge doesn't exist!");
 
-        [HttpDelete("{fridgeProductsId}")]
-        public IActionResult RemoveProducts(Guid fridgeProductsId)
-        {
-            if (!fridgeProductsRepository.IsFridgeProductExist(fridgeProductsId))
-                return NotFound();
+			// метод возвращает либо пустую последовательность, либо заполненную, если есть совпадения
+			IEnumerable<ResponceFridgeProducts> products = fridgeProductsRepository.GetProductsList(fridgeGuid);
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+			if (!products.Any())
+				return NoContent();
 
-            if(!fridgeProductsRepository.RemoveFridgeProducts(fridgeProductsId))
-            {
-                ModelState.AddModelError("", "Something went wrong while saving!");
-                return StatusCode(500, ModelState);
-            }
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
 
-            return Ok("Successfully removed!");
-        }
+			return Ok(products);
+		}
 
-        [HttpPut]
-        public IActionResult UpdateProductsToDefQuant()
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+		[HttpDelete("{fridgeProductsId}")]
+		public IActionResult RemoveProducts(Guid fridgeProductsId)
+		{
+			if (!fridgeProductsRepository.IsFridgeProductExist(fridgeProductsId))
+				return NotFound();
 
-            int savedCount = fridgeProductsRepository.UpdateProductsToDefQuant();
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
 
-            if (savedCount <= 0)
-                return Ok("Was not found to be updated!");
+			if (!fridgeProductsRepository.RemoveFridgeProducts(fridgeProductsId))
+			{
+				ModelState.AddModelError("", "Something went wrong while saving!");
+				return StatusCode(500, ModelState);
+			}
 
-            return Ok($"Successfully updated {savedCount} products!");
-        }
+			return Ok("Successfully removed!");
+		}
 
-        [HttpPost("AddProduct")]
-        public IActionResult AddProduct(Guid fridgeGuid, Guid productGuid, int quantity)
-        {   
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+		[HttpPut]
+		public IActionResult UpdateProductsToDefQuant()
+		{
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
 
-            if (quantity < 0)
-            {
-                ModelState.AddModelError("", "You can't add this count of products!");
-                return BadRequest();
-            }
+			int savedCount = fridgeProductsRepository.UpdateProductsToDefQuant();
 
-            if (!fridgeProductsRepository.IsProductExist(productGuid) ||
-                !fridgeProductsRepository.IsFridgeExist(fridgeGuid))
-            {
-                ModelState.AddModelError("", "The product or the refrigerator doesn't exist!");
-                return StatusCode(400,ModelState);
-            }
+			if (savedCount <= 0)
+				return Ok("Was not found to be updated!");
 
-            if (!fridgeProductsRepository.AddProducts(fridgeGuid,productGuid,quantity))
-            {
-                ModelState.AddModelError("","Something went wrong while saving!");
-                return StatusCode(500, ModelState);
-            }
+			return Ok($"Successfully updated {savedCount} products!");
+		}
 
-            return Ok("Successfully created!");
-        }
+		[HttpPost("AddProduct")]
+		public IActionResult AddProduct(Guid fridgeGuid, Guid productGuid, int quantity)
+		{
+			if (!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			if (quantity < 0)
+			{
+				ModelState.AddModelError("", "You can't add this count of products!");
+				return BadRequest();
+			}
+
+			if (!fridgeProductsRepository.IsProductExist(productGuid) ||
+				!fridgeProductsRepository.IsFridgeExist(fridgeGuid))
+			{
+				ModelState.AddModelError("", "The product or the refrigerator doesn't exist!");
+				return StatusCode(400, ModelState);
+			}
+
+			if (!fridgeProductsRepository.AddProducts(fridgeGuid, productGuid, quantity))
+			{
+				ModelState.AddModelError("", "Something went wrong while saving!");
+				return StatusCode(500, ModelState);
+			}
+
+			return Ok("Successfully created!");
+		}
 
 		[HttpPost("AddProducts")]
 		public IActionResult AddProducts([FromBody] IEnumerable<Guid> productsGuids, Guid fridgeGuid)

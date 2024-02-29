@@ -2,7 +2,7 @@
 {
     public class ResponceFridgeProducts
     {
-        public Guid Guid { get; set; }
+        public Guid ProductGuid { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
     }

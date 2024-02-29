@@ -10,7 +10,6 @@ namespace WebApiFridges.API.MyResponceClasses
 		public string Name {get;set;}
 		[Required]
 		public Guid ModelGuid {get;set;}
-		[Required]
 		public string? OwnerName {get;set;}
 	}
 }
