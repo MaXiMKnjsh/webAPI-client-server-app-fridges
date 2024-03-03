@@ -26,9 +26,10 @@ namespace WebApiFridges.Controllers
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
 
+
 			if (!fridgeProductsRepository.EditProducts(productsGuids, fridgeGuid))
 			{
-				ModelState.AddModelError("", "Something went wrong while saving!");
+				ModelState.AddModelError("", "Something went wrong while saving! (EditProducts)");
 				return StatusCode(500, ModelState);
 			}
 
