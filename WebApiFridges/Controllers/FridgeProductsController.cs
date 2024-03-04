@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NuGet.Configuration;
 using System.Collections.Generic;
+using WebApiFridges.API.MyResponceClasses;
 using WebApiFridges.Models;
 using WebApiFridges.MyIntefaces;
 using WebApiFridges.MyResponceClasses;
@@ -18,7 +20,7 @@ namespace WebApiFridges.Controllers
 		}
 
 		[HttpPut("{fridgeGuid}")]
-		public IActionResult EditProducts([FromBody] IEnumerable<Guid> productsGuids, Guid fridgeGuid)
+		public IActionResult EditProducts([FromBody] IEnumerable<ResponceFridgeProductsToEdit> updatedProducts, Guid fridgeGuid)
 		{
 			if (!fridgeProductsRepository.IsFridgeExist(fridgeGuid))
 				return NotFound("Fridge doesn't exist!");
@@ -26,8 +28,7 @@ namespace WebApiFridges.Controllers
 			if (!ModelState.IsValid)
 				return BadRequest(ModelState);
 
-
-			if (!fridgeProductsRepository.EditProducts(productsGuids, fridgeGuid))
+			if (!fridgeProductsRepository.EditProducts(updatedProducts, fridgeGuid))
 			{
 				ModelState.AddModelError("", "Something went wrong while saving! (EditProducts)");
 				return StatusCode(500, ModelState);

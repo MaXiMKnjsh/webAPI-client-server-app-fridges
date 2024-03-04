@@ -1,4 +1,5 @@
-﻿using WebApiFridges.Models;
+﻿using WebApiFridges.API.MyResponceClasses;
+using WebApiFridges.Models;
 using WebApiFridges.MyResponceClasses;
 
 namespace WebApiFridges.MyIntefaces
@@ -15,7 +16,7 @@ namespace WebApiFridges.MyIntefaces
         bool RemoveFridgeProducts(Guid guid);
         bool IsFridgeProductExist(Guid fridgeProductId);
         int UpdateProductsToDefQuant();
-        bool EditProducts(IEnumerable<Guid> productsGuids, Guid fridgeGuid);
+        bool EditProducts(IEnumerable<ResponceFridgeProductsToEdit> productsGuids, Guid fridgeGuid);
         bool Clear(Guid fridgeGuid);
 		int SaveWithCount();
     }

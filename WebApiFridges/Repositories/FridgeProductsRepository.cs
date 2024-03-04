@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebApiFridges.API.MyResponceClasses;
 using WebApiFridges.Data;
 using WebApiFridges.Models;
 using WebApiFridges.MyIntefaces;
@@ -68,7 +69,7 @@ namespace WebApiFridges.Repository
 				{
 					ProductId = productGuid,
 					FridgeId = fridgeGuid,
-					Quantity = dataContext.Products.FirstOrDefault(x => x.Id == productGuid)?.DefaultQuantity ?? 0
+					Quantity = 0
 				});
 			}
 
@@ -128,12 +129,24 @@ namespace WebApiFridges.Repository
 			return dataContext.SaveChanges();
 		}
 
-		public bool EditProducts(IEnumerable<Guid> productsGuids, Guid fridgeGuid)
+		public bool EditProducts(IEnumerable<ResponceFridgeProductsToEdit> updatedProducts, Guid fridgeGuid)
 		{
-				if (Clear(fridgeGuid))
-				return AddProducts(productsGuids, fridgeGuid);
-			else
+			if (!Clear(fridgeGuid))
 				return false;
+
+			if (!updatedProducts.Any())
+				return true;
+			
+			foreach (var updatedProduct in updatedProducts)
+			{
+				dataContext.FridgeProducts.Add(new FridgeProducts()
+				{
+					FridgeId = fridgeGuid,
+					ProductId = updatedProduct.ProductGuid,
+					Quantity = updatedProduct.Quantity
+				});
+			}
+			return Save();
 		}
 
 		public bool Clear(Guid fridgeGuid)
